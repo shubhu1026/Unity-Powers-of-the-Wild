@@ -1446,6 +1446,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf8c61ea6a47b940926339c61944baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseMovementSpeed: 2
+--- !u!114 &929681129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929681115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b8ab87f47b0b54cb9841fe73e7a5a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability1: {fileID: 11400000, guid: 535c7a7d6b9689643b41074889e98499, type: 2}
+  ability2: {fileID: 11400000, guid: 774098f8b003a5e42b24849291ebdfff, type: 2}
+  ability3: {fileID: 11400000, guid: 3618cafe061c4f4418ad3cfc6e733f73, type: 2}
+  abilityButtonPressed: 0
 --- !u!1 &953689377
 GameObject:
   m_ObjectHideFlags: 0

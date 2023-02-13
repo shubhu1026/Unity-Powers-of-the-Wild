@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    // [SerializeField] AbilityHolder ability;
+
     PlayerInput playerInput;
     CharacterController characterController;
     Animator animator;
@@ -20,10 +22,10 @@ public class PlayerMovement : MonoBehaviour
     Vector3 currentMovement;
     Vector3 currentRunMovement;
     Vector3 appliedMovement;
-    float movementSpeed = 2f;
+    public float baseMovementSpeed = 2f;
     bool isMovementPressed;
     bool isRunPressed;
-    float runMulitplier = 2.0f;
+    float baseRunMultiplier = 2.0f;
 
     //Gravity Support
     float groundedGravity = -0.05f;
@@ -81,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.CharacterControls.Run.canceled += OnRun;
         playerInput.CharacterControls.Jump.started += OnJump;
         playerInput.CharacterControls.Jump.canceled += OnJump;
+        playerInput.CharacterControls.Ability.performed += OnAbility;
 
         SetupJumpVariables();
     }
@@ -100,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             appliedMovement.z = currentMovement.z;
         }
 
-        characterController.Move(appliedMovement * movementSpeed * Time.deltaTime);
+        characterController.Move(appliedMovement * baseMovementSpeed * Time.deltaTime);
 
         HandleGravity();
         HandleJump();
@@ -169,8 +172,8 @@ public class PlayerMovement : MonoBehaviour
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
         currentMovement.z = currentMovementInput.y;
-        currentRunMovement.x = currentMovementInput.x * runMulitplier;
-        currentRunMovement.z = currentMovementInput.y * runMulitplier;
+        currentRunMovement.x = currentMovementInput.x * baseRunMultiplier;
+        currentRunMovement.z = currentMovementInput.y * baseRunMultiplier;
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
     }
 
@@ -243,6 +246,12 @@ public class PlayerMovement : MonoBehaviour
             targetRotation = Quaternion.LookRotation(positionToLookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
         }
+    }
+
+    void OnAbility(InputAction.CallbackContext context)
+    {
+        // isAbilityPressed = context.ReadValueAsButton();  
+        Debug.Log("ability key pressed");
     }
 
     void OnEnable() 
