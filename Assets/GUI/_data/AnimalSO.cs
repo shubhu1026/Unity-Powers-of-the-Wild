@@ -4,5 +4,6 @@ using UnityEngine;
 public class AnimalSO : ScriptableObject {
     public string nameAnimal;
     public Sprite animalIcon;
+    [TextArea]
     public string description;
 }
