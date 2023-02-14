@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c87d0f7526651469401c4810e0fa14, type: 3}
-  m_Name: New Low Speed Ability
+  m_Script: {fileID: 11500000, guid: 04ca7d1b9a2c5734e808696fcc364af6, type: 3}
+  m_Name: Very High Speed
   m_EditorClassIdentifier: 
   name: 
-  activeTime: 3
+  activeTime: 5
   cooldownTime: 0
-  abilityKey: 0
-  speedIncreasePercentage: 50
+  abilityKey: 51
+  speedIncreasePercentage: 100

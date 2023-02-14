@@ -13,14 +13,13 @@ public class CheetahAbility : Ability
     public override void Activate(GameObject parent)
     {
         playerMovement = parent.GetComponent<PlayerMovement>();
-        originalMovementSpeed = playerMovement.baseMovementSpeed;
-        playerMovement.baseMovementSpeed += (speedIncreasePercentage * originalMovementSpeed)/100;
-        Debug.Log("move speed: " + playerMovement.baseMovementSpeed);
+        playerMovement.MovementSpeed += (speedIncreasePercentage * playerMovement.OriginalMovementSpeed)/100;
+        Debug.Log("move speed: " + playerMovement.MovementSpeed);
     }
 
     public override void ResetAbilityChanges(GameObject parent)
     {
-        playerMovement.baseMovementSpeed = originalMovementSpeed;
-        Debug.Log("move speed: " + playerMovement.baseMovementSpeed);
+        playerMovement.MovementSpeed = playerMovement.OriginalMovementSpeed;
+        Debug.Log("move speed: " + playerMovement.MovementSpeed);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class LowSpeedAbility : Ability
 {
-    [Range(0,100)]public float speedIncreasePercentage;
+    [Range(0,100)]public float speedDecreasePercentage;
     
     PlayerMovement playerMovement;
     float originalMovementSpeed;
@@ -13,14 +13,13 @@ public class LowSpeedAbility : Ability
     public override void Activate(GameObject parent)
     {
         playerMovement = parent.GetComponent<PlayerMovement>();
-        originalMovementSpeed = playerMovement.baseMovementSpeed;
-        playerMovement.baseMovementSpeed -= (speedIncreasePercentage * originalMovementSpeed)/100;
-        Debug.Log("move speed: " + playerMovement.baseMovementSpeed);
+        playerMovement.MovementSpeed -= (speedDecreasePercentage * playerMovement.OriginalMovementSpeed)/100;
+        Debug.Log("move speed: " + playerMovement.MovementSpeed);
     }
 
     public override void ResetAbilityChanges(GameObject parent)
     {
-        playerMovement.baseMovementSpeed = originalMovementSpeed;
-        Debug.Log("move speed: " + playerMovement.baseMovementSpeed);
+        playerMovement.MovementSpeed = playerMovement.OriginalMovementSpeed;
+        Debug.Log("move speed: " + playerMovement.MovementSpeed);
     }
 }

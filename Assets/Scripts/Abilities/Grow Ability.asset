@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b59d230972f144dbd64d219570c9ba, type: 3}
-  m_Name: New Cheetah Ability
+  m_Script: {fileID: 11500000, guid: 201a6d36f9259984a96f27a80620b930, type: 3}
+  m_Name: Grow Ability
   m_EditorClassIdentifier: 
-  name: Cheetah Ability
-  activeTime: 4
+  name: 
+  activeTime: 0
   cooldownTime: 0
   abilityKey: 0
-  speedIncreasePercentage: 50
+  increaseInScale: 2

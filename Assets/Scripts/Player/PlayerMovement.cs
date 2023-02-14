@@ -22,10 +22,17 @@ public class PlayerMovement : MonoBehaviour
     Vector3 currentMovement;
     Vector3 currentRunMovement;
     Vector3 appliedMovement;
-    public float baseMovementSpeed = 2f;
+    float movementSpeed = 2f;
+    float originalMovementSpeed = 2f;
     bool isMovementPressed;
     bool isRunPressed;
-    float baseRunMultiplier = 2.0f;
+    float originalRunMultiplier = 2.0f;
+    float runMultiplier = 2.0f;
+
+    public float OriginalMovementSpeed{get{return originalMovementSpeed;}}
+    public float OriginalRunMultiplier{get{return originalRunMultiplier;}}
+    public float MovementSpeed{get{return movementSpeed;} set{movementSpeed = value;}}
+    public float RunMultiplier{get{return runMultiplier;} set{runMultiplier = value;}}
 
     //Gravity Support
     float groundedGravity = -0.05f;
@@ -33,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     float previousYVelocity;
     float newYVelocity;
     float nextYVelocity;
+
+    public float Gravity{get{return gravity;} set{gravity = value;}}
     
     //falling gravity change support
     bool isFalling;
@@ -49,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
     float rotationFactorPerFrame = 6f;
 
     //jump support
-    bool isJumpPressed = false;
+    public bool isJumpPressed = false;
     float initialJumpVelocity;
     float maxJumpHeight = 1f;
     float maxJumpTime = 0.75f;
@@ -64,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
     float thirdJumpGravity;
     float thirdJumpInitialVelocity;
     Coroutine currentJumpResetRoutine = null;
+
+    public bool isBurrowing = false;
 
     void Awake() 
     {
@@ -103,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
             appliedMovement.z = currentMovement.z;
         }
 
-        characterController.Move(appliedMovement * baseMovementSpeed * Time.deltaTime);
+        characterController.Move(appliedMovement * movementSpeed * Time.deltaTime);
 
         HandleGravity();
         HandleJump();
@@ -131,6 +142,11 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleJump()
     {
+        if(isBurrowing)
+        {
+            return;
+        }
+
         if(!isJumping && characterController.isGrounded && isJumpPressed)
         {
             if(JumpCount < 3 && currentJumpResetRoutine != null)
@@ -172,8 +188,8 @@ public class PlayerMovement : MonoBehaviour
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
         currentMovement.z = currentMovementInput.y;
-        currentRunMovement.x = currentMovementInput.x * baseRunMultiplier;
-        currentRunMovement.z = currentMovementInput.y * baseRunMultiplier;
+        currentRunMovement.x = currentMovementInput.x * runMultiplier;
+        currentRunMovement.z = currentMovementInput.y * runMultiplier;
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
     }
 
@@ -204,6 +220,7 @@ public class PlayerMovement : MonoBehaviour
     void HandleGravity()
     {
         isFalling = currentMovement.y <= 0.0f || !isJumpPressed;
+       
         if(characterController.isGrounded)
         {
             if(isJumpAnimating)
@@ -246,6 +263,30 @@ public class PlayerMovement : MonoBehaviour
             targetRotation = Quaternion.LookRotation(positionToLookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
         }
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        float pushPower = 2;
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        // no rigidbody
+        if (body == null || body.isKinematic)
+            return;
+
+        // We dont want to push objects below us
+        if (hit.moveDirection.y < -0.3f)
+            return;
+
+        // Calculate push direction from move direction,
+        // we only push objects to the sides never up and down
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+
+        // If you know how fast your character is trying to move,
+        // then you can also multiply the push velocity by that.
+
+        // Apply the push
+        body.velocity = pushDir * pushPower;
     }
 
     void OnAbility(InputAction.CallbackContext context)

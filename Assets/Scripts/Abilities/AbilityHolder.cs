@@ -4,73 +4,120 @@ using UnityEngine;
 
 public class AbilityHolder : MonoBehaviour
 {
-    [SerializeField] Ability ability1;
-    [SerializeField] Ability ability2;
-    [SerializeField] Ability ability3;
+    [SerializeField] Ability firstAbility;
+    [SerializeField] Ability secondAbility;
+    [SerializeField] Ability thirdAbility;
 
-    float activeTime;
-    float cooldownTime;
-    
+    // Ability activeAbility;
+    // Ability previousAbility;
+
+    int count1 = 0;
+    int count2 = 0;
+    int count3 = 0;
+
     enum AbilityState{
-        ready,
-        active,
-        cooldown
+        none,
+        ability1,
+        ability2,
+        ability3
     }
 
-    AbilityState state = AbilityState.ready;
+    AbilityState currentAbility = AbilityState.none;
 
-    [SerializeField] bool abilityButtonPressed;
-
-    void Start() 
+    // Start is called before the first frame update
+    void Start()
     {
-        ability1.abilityKey = KeyCode.Alpha1;
-        ability2.abilityKey = KeyCode.Alpha2;
-        ability3.abilityKey = KeyCode.Alpha3;
+        firstAbility.abilityKey = KeyCode.Alpha1;
+        secondAbility.abilityKey = KeyCode.Alpha2;
+        thirdAbility.abilityKey = KeyCode.Alpha3;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        SwitchAbilityState(ability1);
-        SwitchAbilityState(ability2);
-        SwitchAbilityState(ability3);
+        SwitchAbilityState();
     }
 
-    void SwitchAbilityState(Ability ability)
+    void SwitchAbilityState()
     {
-        switch(state)
+        switch(currentAbility)
         {
-            case AbilityState.ready:
-                if(Input.GetKeyDown(ability.abilityKey))
+            case AbilityState.none:
+                if(Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    ability.Activate(gameObject);
-                    state = AbilityState.active;
-                    activeTime = ability.activeTime;
+                    currentAbility = AbilityState.ability1;
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    currentAbility = AbilityState.ability2;
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    currentAbility = AbilityState.ability3;
                 }
                 break;
-            case AbilityState.active:
-                if(activeTime > 0)
+            case AbilityState.ability1:
+                if(count1 < 1)
                 {
-                    activeTime -= Time.deltaTime;
+                    firstAbility.Activate(gameObject);
+                    count1++;
                 }
-                else
+                
+                if(Input.GetKeyDown(KeyCode.Alpha2))
                 {
-                    ability.ResetAbilityChanges(gameObject);
-                    state = AbilityState.cooldown;
-                    cooldownTime = ability.cooldownTime;
+                    firstAbility.ResetAbilityChanges(gameObject);
+                    count1 = 0;
+                    currentAbility = AbilityState.ability2;
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    firstAbility.ResetAbilityChanges(gameObject);
+                    count1 = 0;
+                    currentAbility = AbilityState.ability3;
                 }
                 break;
-            case AbilityState.cooldown:
-                if(cooldownTime > 0)
+            case AbilityState.ability2:
+
+                if(count2 < 1)
                 {
-                    cooldownTime -= Time.deltaTime;
+                    secondAbility.Activate(gameObject);
+                    count2++;
                 }
-                else
+
+                if(Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    state = AbilityState.ready;
+                    secondAbility.ResetAbilityChanges(gameObject);
+                    count2 = 0;
+                    currentAbility = AbilityState.ability1;
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    secondAbility.ResetAbilityChanges(gameObject);
+                    count2 = 0;
+                    currentAbility = AbilityState.ability3;
+                }
+                break;
+            case AbilityState.ability3:
+
+                if(count3 < 1)
+                {
+                    thirdAbility.Activate(gameObject);
+                    count3++;
+                }
+                
+                if(Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    thirdAbility.ResetAbilityChanges(gameObject);
+                    count3 = 0;
+                    currentAbility = AbilityState.ability1;
+                }
+                else if(Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    thirdAbility.ResetAbilityChanges(gameObject);
+                    count3 = 0;
+                    currentAbility = AbilityState.ability2;
                 }
                 break;
         }
     }
-
-
 }
