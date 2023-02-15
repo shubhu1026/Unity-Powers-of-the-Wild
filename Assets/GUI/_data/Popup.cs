@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Popup : MonoBehaviour
 {
     public static Popup instance;
+    [SerializeField] float arrowHeight = 40f;
     [SerializeField] private TextMeshProUGUI textMeshPro;
     [SerializeField] private Image background;
     [SerializeField] private Vector2 borderOffset;
@@ -17,6 +18,7 @@ public class Popup : MonoBehaviour
             instance = this;
             
             gameObject.SetActive(false);
+            textMeshPro.transform.localPosition = new Vector3(0, borderOffset.y, 0);
             return;
         }
         Destroy(gameObject);
@@ -29,11 +31,12 @@ public class Popup : MonoBehaviour
         float height = textMeshPro.preferredHeight;
         Vector2 size = new Vector2(width + borderOffset.x * 2, height + borderOffset.x * 2);
         background.rectTransform.sizeDelta = size;
-        textMeshPro.transform.position = new Vector3(
-                textMeshPro.transform.position.x,
-                textMeshPro.transform.position.y + borderOffset.y,
-                textMeshPro.transform.position.z); 
-        transform.position = position + (Vector3)borderOffset;
+        Vector3 newPosition = new Vector3(
+                position.x,
+                position.y + borderOffset.y/2 + arrowHeight/2,
+                position.z); 
+        
+        transform.position = newPosition;
     }
 
     

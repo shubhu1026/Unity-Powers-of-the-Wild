@@ -6,4 +6,5 @@ public class AnimalSO : ScriptableObject {
     public Sprite animalIcon;
     [TextArea]
     public string description;
+    public AudioClip skillSound;
 }

@@ -19,13 +19,17 @@ public class AnimalButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         this.animalSO = animalSO;
         icon.sprite = animalSO.animalIcon;
+        GetComponent<Button>().onClick.AddListener(
+                ()=>AudioSource.PlayClipAtPoint(this.animalSO.skillSound, Camera.main.transform.position));
     }
     
     
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("over the button");
-        Popup.instance.ShowPopup(transform.position, animalSO.description);
+        var v = GetComponent<RectTransform>();
+        Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
+        Popup.instance.ShowPopup(position, animalSO.description);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
