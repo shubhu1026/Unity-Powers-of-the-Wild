@@ -10,12 +10,14 @@ public class KangarooJumpAbility : Ability
 
     public override void Activate(GameObject parent)
     {
+        Debug.Log("K jump activated");
         playerMovement = parent.GetComponent<PlayerMovement>();
         playerMovement.JumpForce = playerMovement.BaseJumpForce * jumpMultiplier;
     }
 
     public override void ResetAbilityChanges(GameObject parent)
     {
+        Debug.Log("K jump deactivated");
         playerMovement.JumpForce = playerMovement.BaseJumpForce;
     }
 }

@@ -60,67 +60,51 @@ public class AbilityHolder : MonoBehaviour
                 }
                 break;
             case AbilityState.ability1:
-                if(count1 < 1)
-                {
-                    firstAbility.Activate(gameObject);
-                    count1++;
-                }
-                
-                if(Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    firstAbility.ResetAbilityChanges(gameObject);
-                    count1 = 0;
-                    currentAbility = AbilityState.ability2;
-                }
-                else if(Input.GetKeyDown(KeyCode.Alpha3))
-                {
-                    firstAbility.ResetAbilityChanges(gameObject);
-                    count1 = 0;
-                    currentAbility = AbilityState.ability3;
-                }
+                AbilityStatus(firstAbility, ref count1);
                 break;
             case AbilityState.ability2:
-
-                if(count2 < 1)
-                {
-                    secondAbility.Activate(gameObject);
-                    count2++;
-                }
-
-                if(Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    secondAbility.ResetAbilityChanges(gameObject);
-                    count2 = 0;
-                    currentAbility = AbilityState.ability1;
-                }
-                else if(Input.GetKeyDown(KeyCode.Alpha3))
-                {
-                    secondAbility.ResetAbilityChanges(gameObject);
-                    count2 = 0;
-                    currentAbility = AbilityState.ability3;
-                }
+                AbilityStatus(secondAbility, ref count2);
                 break;
             case AbilityState.ability3:
-
-                if(count3 < 1)
-                {
-                    thirdAbility.Activate(gameObject);
-                    count3++;
-                }
-                
-                if(Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    thirdAbility.ResetAbilityChanges(gameObject);
-                    count3 = 0;
-                    currentAbility = AbilityState.ability1;
-                }
-                else if(Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    thirdAbility.ResetAbilityChanges(gameObject);
-                    count3 = 0;
-                    currentAbility = AbilityState.ability2;
-                }
+                AbilityStatus(thirdAbility, ref count3);
                 break;
+        }
+    }
+
+    void AbilityStatus(Ability ability, ref int count)
+    {
+        if(count < 1)
+        {
+            ability.Activate(gameObject);
+            count++;
+        }
+
+        if(Input.GetKeyDown(ability.abilityKey))
+        {
+            ability.ResetAbilityChanges(gameObject);
+            count = 0;
+            currentAbility = AbilityState.none;
+        }
+        else
+        {
+           if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ability.ResetAbilityChanges(gameObject);
+                count = 0;
+                currentAbility = AbilityState.ability1;
+            }
+            else if(Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ability.ResetAbilityChanges(gameObject);
+                count = 0;
+                currentAbility = AbilityState.ability2;
+            }
+            else if(Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ability.ResetAbilityChanges(gameObject);
+                count = 0;
+                currentAbility = AbilityState.ability3;
+            }
         }
     }
 }

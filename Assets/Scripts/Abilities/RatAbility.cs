@@ -16,7 +16,7 @@ public class RatAbility : Ability
 
     public override void Activate(GameObject parent)
     {
-        Debug.Log("RAT AbILITY");
+        Debug.Log("rat activated");
         playerTransform = parent.GetComponentInParent<Transform>();
         playerMovement = parent.GetComponent<PlayerMovement>();
         originalScale = parent.transform.localScale;
@@ -28,6 +28,7 @@ public class RatAbility : Ability
 
     public override void ResetAbilityChanges(GameObject parent)
     {
+        Debug.Log("rat deactivated");
         playerTransform.localScale = originalScale;
         playerMovement.playerHeight *= playerMovement.OriginalPlayerHeight;
     }

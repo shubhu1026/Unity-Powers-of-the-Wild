@@ -13,7 +13,7 @@ public class BurrowAbility : Ability
 
     public override void Activate(GameObject parent)
     {
-        Debug.Log("Burrow");
+        Debug.Log("Burrow activated");
         playerMovement = parent.GetComponent<PlayerMovement>();
         collider = parent.GetComponentInChildren<CapsuleCollider>();
         originalCenter = collider.center;
@@ -27,6 +27,7 @@ public class BurrowAbility : Ability
 
     public override void ResetAbilityChanges(GameObject parent)
     {
+        Debug.Log("Burrow deactivated");
         collider.height = originalHeight;
         collider.center = originalCenter;
 
