@@ -9,35 +9,26 @@ public class RatAbility : Ability
 
     Vector3 originalScale;
     Vector3 targetScale;
-    Transform parentTransform;
+    Transform playerTransform;
     Vector3 scale;
 
-    float shrinkTime = 2f;
-    float shrinkRate = 7f;
+    PlayerMovement playerMovement;
 
     public override void Activate(GameObject parent)
     {
         Debug.Log("RAT AbILITY");
+        playerTransform = parent.GetComponentInParent<Transform>();
+        playerMovement = parent.GetComponent<PlayerMovement>();
         originalScale = parent.transform.localScale;
         targetScale = originalScale * decreaseInScale;
 
-        // parent.transform.localScale = targetScale;
-        parentTransform = parent.transform;
-
-        if(shrinkTime > 0)
-        {
-            shrinkTime -= Time.deltaTime;
-            parentTransform.localScale -= new Vector3(0.2F, .2f, .2f) * shrinkRate;
-        }
+        playerTransform.localScale = targetScale;
+        playerMovement.playerHeight *= 0.5f;
     }
 
     public override void ResetAbilityChanges(GameObject parent)
     {
-        if(shrinkTime > 0)
-        {
-            shrinkTime -= Time.deltaTime;
-            parentTransform.localScale += new Vector3(0.2F, .2f, .2f) * shrinkRate;
-        }
-        // parent.transform.localScale = originalScale;
+        playerTransform.localScale = originalScale;
+        playerMovement.playerHeight *= playerMovement.OriginalPlayerHeight;
     }
 }

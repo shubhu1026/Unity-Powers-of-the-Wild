@@ -27,8 +27,11 @@ public class AbilityHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(firstAbility != null)
         firstAbility.abilityKey = KeyCode.Alpha1;
+        if(secondAbility != null)
         secondAbility.abilityKey = KeyCode.Alpha2;
+        if(thirdAbility != null)
         thirdAbility.abilityKey = KeyCode.Alpha3;
     }
 

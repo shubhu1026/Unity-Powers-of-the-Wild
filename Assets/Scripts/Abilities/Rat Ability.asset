@@ -15,5 +15,5 @@ MonoBehaviour:
   name: 
   activeTime: 5
   cooldownTime: 0
-  abilityKey: 51
-  decreaseInScale: 0.1
+  abilityKey: 49
+  decreaseInScale: 0.3

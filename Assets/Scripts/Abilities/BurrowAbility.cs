@@ -6,7 +6,7 @@ using UnityEngine;
 public class BurrowAbility : Ability
 {
     PlayerMovement playerMovement;
-    CharacterController characterController;
+    CapsuleCollider collider;
 
     Vector3 originalCenter;
     float originalHeight;
@@ -15,23 +15,21 @@ public class BurrowAbility : Ability
     {
         Debug.Log("Burrow");
         playerMovement = parent.GetComponent<PlayerMovement>();
-        characterController = parent.GetComponent<CharacterController>();
-        originalCenter = characterController.center;
-        originalHeight = characterController.height;
+        collider = parent.GetComponentInChildren<CapsuleCollider>();
+        originalCenter = collider.center;
+        originalHeight = collider.height;
 
-        playerMovement.isBurrowing = true;
+        // playerMovement.isBurrowing = true;
 
-        characterController.height = 0.3f;
-        characterController.center = new Vector3(characterController.center.x, 1.5f, characterController.center.z);
+        collider.height = 0.3f;
+        collider.center = new Vector3(collider.center.x, 1.5f, collider.center.z);
     }
 
     public override void ResetAbilityChanges(GameObject parent)
     {
-        characterController.height = originalHeight;
-        characterController.center = originalCenter; 
-        // playerMovement.isJumpPressed = true;
-        playerMovement.isBurrowing = false;
-        
-        characterController.Move(new Vector3(0, 2, 0));
+        collider.height = originalHeight;
+        collider.center = originalCenter;
+
+        parent.GetComponent<PlayerMovement>().Jump();
     }
 }
