@@ -22,7 +22,7 @@ public class BurrowAbility : Ability
         playerMovement.isBurrowing = true;
 
         collider.height = 0.3f;
-        collider.center = new Vector3(collider.center.x, 4.4f, collider.center.z);
+        collider.center = new Vector3(collider.center.x, 1.7f, collider.center.z);
     }
 
     public override void Active(GameObject parent)

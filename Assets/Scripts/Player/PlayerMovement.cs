@@ -39,11 +39,20 @@ public class PlayerMovement : MonoBehaviour
     float lowJumpMulitiplier = 2f;
     float fallGravity;
     float lowJumpGravity;
+    [Header("Ground Check")]
+    [SerializeField] Vector3 boxSize;
+    [SerializeField] float maxDistance;
     
     Vector3 moveDirection;
 
     Rigidbody rb;
-    AbilityHolder abilityHolder;
+    SurfaceAngle surfaceAngleScript;
+    float surfaceAngle;
+
+    //Animation support
+    bool isMovementPressed = false;
+    Animator animator;
+    
 
     public bool isBurrowing = false;
 
@@ -51,7 +60,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        abilityHolder = GetComponent<AbilityHolder>();
+        surfaceAngleScript = GetComponent<SurfaceAngle>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Start()
@@ -66,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        GroundCheck();
 
         MyInput();
         SpeedControl();
@@ -76,6 +86,11 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0;
+
+        if(!isBurrowing)
+        {
+            SlideOnSlopes();
+        }
     }
 
     void FixedUpdate() 
@@ -91,25 +106,59 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void SlideOnSlopes()
+    {
+        surfaceAngle = surfaceAngleScript.GetSurfaceAngle();
+        if(surfaceAngle > 45)
+        {
+            horizontalInput = 0;
+            verticalInput = 0;
+            rb.velocity = Vector3.up * -4f;
+        }
+    }
+
+    void GroundCheck()
+    {
+        grounded = Physics.Raycast(transform.position, Vector3.down, 0.2f, whatIsGround);
+    }
+
     void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        if(horizontalInput == 0 && verticalInput == 0)
+        {
+            isMovementPressed = false;
+            animator.SetBool("isWalking", false);
+        }
+        else
+        {
+            isMovementPressed = true;
+            animator.SetBool("isWalking", true);
+        }
+        
+
         if(Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
+            animator.SetTrigger("jumpTrigger");
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
         if(Input.GetKey(KeyCode.LeftShift))
         {
             moveSpeed = baseMoveSpeed * 1.5f;
+            if(isMovementPressed)
+            {
+                animator.SetBool("isRunning", true);
+            }
         }
         else
         {
             moveSpeed = baseMoveSpeed;
+            animator.SetBool("isRunning", false);
         }
     }
 
