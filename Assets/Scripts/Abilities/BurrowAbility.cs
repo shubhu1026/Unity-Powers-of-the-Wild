@@ -19,10 +19,15 @@ public class BurrowAbility : Ability
         originalCenter = collider.center;
         originalHeight = collider.height;
 
-        // playerMovement.isBurrowing = true;
+        playerMovement.isBurrowing = true;
 
         collider.height = 0.3f;
-        collider.center = new Vector3(collider.center.x, 1.5f, collider.center.z);
+        collider.center = new Vector3(collider.center.x, 4.4f, collider.center.z);
+    }
+
+    public override void Active(GameObject parent)
+    {
+        
     }
 
     public override void ResetAbilityChanges(GameObject parent)
@@ -30,7 +35,7 @@ public class BurrowAbility : Ability
         Debug.Log("Burrow deactivated");
         collider.height = originalHeight;
         collider.center = originalCenter;
-
-        parent.GetComponent<PlayerMovement>().Jump();
+        playerMovement.isBurrowing = false;
+        playerMovement.Jump();
     }
 }

@@ -9,8 +9,11 @@ public class Ability : ScriptableObject
     public float activeTime;
     public float cooldownTime;
 
+    public bool isActive = false;
+
     public KeyCode abilityKey;
     
     public virtual void Activate(GameObject parent) {}
+    public virtual void Active(GameObject parent) {}
     public virtual void ResetAbilityChanges(GameObject parent) {}
 }

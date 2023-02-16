@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Ground Check")]
     [SerializeField] float originalPlayerHeight;
     [SerializeField] LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
 
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
@@ -43,11 +43,15 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    AbilityHolder abilityHolder;
+
+    public bool isBurrowing = false;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        abilityHolder = GetComponent<AbilityHolder>();
     }
 
     void Start()

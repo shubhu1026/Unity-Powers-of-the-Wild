@@ -7,7 +7,19 @@ public class GlueTest : MonoBehaviour
     public bool isSticky;    
     
     private void OnCollisionEnter(Collision other) {
-        if(!isSticky) return;
+        if(!isSticky)
+        {
+            return;
+            // var joint = GetComponent<FixedJoint>();
+            // if(joint == null)
+            // {
+            //     return;
+            // }
+            // else
+            // {
+            //     joint.connectedBody = null;
+            // }
+        }
         var v = other.gameObject.GetComponent<GlueTest>();
         if(v == null) return;
 

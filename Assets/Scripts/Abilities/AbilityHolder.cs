@@ -10,6 +10,7 @@ public class AbilityHolder : MonoBehaviour
 
     // Ability activeAbility;
     // Ability previousAbility;
+    PlayerMovement playerMovement;
 
     int count1 = 0;
     int count2 = 0;
@@ -24,9 +25,13 @@ public class AbilityHolder : MonoBehaviour
 
     AbilityState currentAbility = AbilityState.none;
 
+    bool canChangeAbility = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerMovement = GetComponent<PlayerMovement>();
+
         if(firstAbility != null)
         firstAbility.abilityKey = KeyCode.Alpha1;
         if(secondAbility != null)
@@ -35,9 +40,26 @@ public class AbilityHolder : MonoBehaviour
         thirdAbility.abilityKey = KeyCode.Alpha3;
     }
 
+    void OnTriggerStay(Collider other) 
+    {
+        if(other.CompareTag("NoAbilityChange"))
+        {
+            canChangeAbility = false;
+        }
+    }
+
+    void OnTriggerExit(Collider other) 
+    {
+        if(other.CompareTag("NoAbilityChange"))
+        {
+            canChangeAbility = true;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if(canChangeAbility)
         SwitchAbilityState();
     }
 
@@ -73,15 +95,23 @@ public class AbilityHolder : MonoBehaviour
 
     void AbilityStatus(Ability ability, ref int count)
     {
+        
         if(count < 1)
         {
             ability.Activate(gameObject);
+            ability.isActive = true;
             count++;
+        }
+
+        if(ability.isActive == true)
+        {
+            ability.Active(gameObject);
         }
 
         if(Input.GetKeyDown(ability.abilityKey))
         {
             ability.ResetAbilityChanges(gameObject);
+            ability.isActive = false;
             count = 0;
             currentAbility = AbilityState.none;
         }
@@ -90,18 +120,21 @@ public class AbilityHolder : MonoBehaviour
            if(Input.GetKeyDown(KeyCode.Alpha1))
             {
                 ability.ResetAbilityChanges(gameObject);
+                ability.isActive = false;
                 count = 0;
                 currentAbility = AbilityState.ability1;
             }
             else if(Input.GetKeyDown(KeyCode.Alpha2))
             {
                 ability.ResetAbilityChanges(gameObject);
+                ability.isActive = false;
                 count = 0;
                 currentAbility = AbilityState.ability2;
             }
             else if(Input.GetKeyDown(KeyCode.Alpha3))
             {
                 ability.ResetAbilityChanges(gameObject);
+                ability.isActive = false;
                 count = 0;
                 currentAbility = AbilityState.ability3;
             }
