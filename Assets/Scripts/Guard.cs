@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,43 +11,102 @@ public class Guard : MonoBehaviour
     [SerializeField] Transform leftMostPosition;
     [SerializeField] Transform rightMostPosition;
 
-    bool moveRight = false;
+    [SerializeField] bool moveOnXAxis = true;
 
-    Vector3 playerPosition;
-    Vector3 leftPosition;
-    Vector3 rightPosition;
+    Animator animator;
+
+    bool moveRight = false;
+    public bool shouldNotWalk = false;
 
     void Awake()
     {
-            if((transform.position - leftMostPosition.position).magnitude > (transform.position - rightMostPosition.position).magnitude)
-            {
-                moveRight = true;
-            }
-
-        leftPosition = new Vector3(leftMostPosition.position.x, 0, leftMostPosition.position.z);
-        rightPosition = new Vector3(rightMostPosition.position.x, 0, rightMostPosition.position.z);
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerPosition = new Vector3(transform.position.x, 0, transform.position.z);
+        shouldNotWalk = isPlaying(animator, "Look Around");
 
-        if(moveRight)
+        if(!shouldNotWalk)
         {
-            transform.Translate((rightPosition - playerPosition).normalized * moveSpeed * Time.deltaTime);
-            if((rightPosition - playerPosition).magnitude < 2)
+            if(moveOnXAxis)
             {
-                moveRight = false;
+                if(moveRight)
+                {
+                    MoveRight();
+                }
+                else
+                {
+                    MoveLeft();
+                }
+            }
+            else
+            {
+                if(moveRight)
+                {
+                    MoveForward();
+                }
+                else
+                {
+                    MoveBackward();
+                }
             }
         }
+    }
+
+    bool isPlaying(Animator anim, string stateName)
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            return true;
         else
+            return false;
+    }
+
+    public void LookForPlayer()
+    {
+        // animator.SetBool("isLookingAround", true);
+        animator.SetTrigger("lookAroundTrigger");
+    }
+
+    private void MoveBackward()
+    {
+        transform.forward = -Vector3.forward;
+        transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime, Space.World);
+        if (transform.position.z < leftMostPosition.position.z)
         {
-            transform.Translate((leftPosition - playerPosition).normalized * moveSpeed * Time.deltaTime);
-            if((leftPosition - playerPosition).magnitude < 2)
-            {
-                moveRight = false;
-            }
+            moveRight = true;
+        }
+    }
+
+    private void MoveForward()
+    {
+        transform.forward = Vector3.forward;
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime, Space.World);
+        if (transform.position.z > rightMostPosition.position.z)
+        {
+            moveRight = false;
+        }
+    }
+
+    private void MoveLeft()
+    {
+        transform.forward = Vector3.left;
+        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime, Space.World);
+        if (transform.position.x < leftMostPosition.position.x)
+        {
+            moveRight = true;
+        }
+    }
+
+    private void MoveRight()
+    {
+        transform.forward = Vector3.right;
+        transform.Translate(Vector3.right * moveSpeed * Time.deltaTime, Space.World);
+        if (transform.position.x > rightMostPosition.position.x)
+        {
+            moveRight = false;
         }
     }
 }

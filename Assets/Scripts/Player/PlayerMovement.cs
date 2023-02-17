@@ -53,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
     bool isMovementPressed = false;
     Animator animator;
     
-
     public bool isBurrowing = false;
 
     void Awake()
