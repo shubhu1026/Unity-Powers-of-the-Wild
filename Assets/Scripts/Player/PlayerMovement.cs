@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     float lowJumpMulitiplier = 2f;
     float fallGravity;
     float lowJumpGravity;
+    bool isJumpPressed;
     [Header("Ground Check")]
     [SerializeField] Vector3 boxSize;
     [SerializeField] float maxDistance;
@@ -53,7 +54,9 @@ public class PlayerMovement : MonoBehaviour
     //Animation support
     bool isMovementPressed = false;
     Animator animator;
-    
+    private int isWalkingHash;
+    private int isRunningHash;
+    private int isJumpingHash;
     public bool isBurrowing = false;
     public bool echoLocation = false;
     public bool isStrong = false;
@@ -65,6 +68,10 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         surfaceAngleScript = GetComponent<SurfaceAngle>();
         animator = GetComponentInChildren<Animator>();
+
+        isWalkingHash = Animator.StringToHash("isWalking");
+        isRunningHash = Animator.StringToHash("isRunning");
+        isJumpingHash = Animator.StringToHash("isJumping");
     }
 
     void Start()
@@ -135,21 +142,25 @@ public class PlayerMovement : MonoBehaviour
         if(horizontalInput == 0 && verticalInput == 0)
         {
             isMovementPressed = false;
-            animator.SetBool("isWalking", false);
+            animator.SetBool(isWalkingHash, false);
         }
         else
         {
             isMovementPressed = true;
-            animator.SetBool("isWalking", true);
+            animator.SetBool(isWalkingHash, true);
         }
         
-
+        isJumpPressed = Input.GetKey(jumpKey);
         if(Input.GetKey(jumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
-            animator.SetTrigger("jumpTrigger");
+            animator.SetBool(isJumpingHash, true);
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+        else if(!isJumpPressed && grounded)
+        {
+            animator.SetBool(isJumpingHash, false);
         }
 
         if(Input.GetKey(KeyCode.LeftShift))
@@ -157,13 +168,13 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = baseMoveSpeed * 1.5f;
             if(isMovementPressed)
             {
-                animator.SetBool("isRunning", true);
+                animator.SetBool(isRunningHash, true);
             }
         }
         else
         {
             moveSpeed = baseMoveSpeed;
-            animator.SetBool("isRunning", false);
+            animator.SetBool(isRunningHash, false);
         }
     }
 
@@ -201,7 +212,6 @@ public class PlayerMovement : MonoBehaviour
     public void Jump()
     {
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 

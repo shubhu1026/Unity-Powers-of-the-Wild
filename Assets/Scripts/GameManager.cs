@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] AbilitySet level1Set;
-    [SerializeField] AbilitySet level2Set;
+    [SerializeField] AbilitySet level1Set1;
+    [SerializeField] AbilitySet level1Set2;
+    [SerializeField] AbilitySet level2Set1;
+    [SerializeField] AbilitySet level2Set2;
     [SerializeField] AbilitySet level3Set1;
     [SerializeField] AbilitySet level3Set2;
 
@@ -26,7 +28,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);     
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         
@@ -35,8 +36,14 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SelectAbilitySet(GetLevelFromSceneBuildIndex());
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadNextLevel()
+    {
+        Debug.Log("Load next level");
+        // SelectAbilitySet(GetLevelFromSceneBuildIndex() + 1);
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     int GetLevelFromSceneBuildIndex()
@@ -59,10 +66,16 @@ public class GameManager : MonoBehaviour
         switch(level)
         {
             case 1:
-                abilitySetToBeUsed = level1Set;
+                if(Random.value > 0.5)
+                    abilitySetToBeUsed = level1Set1;
+                else
+                    abilitySetToBeUsed = level1Set2;    
                 break;
             case 2:
-                abilitySetToBeUsed = level2Set;
+                if(Random.value > 0.5)
+                    abilitySetToBeUsed = level2Set1;
+                else
+                    abilitySetToBeUsed = level2Set2;    
                 break;
             case 3:
                 if(Random.value > 0.5)

@@ -50,7 +50,7 @@ public class AbilityHolder : MonoBehaviour
             if (thirdAbility != null)
                 thirdAbility.abilityKey = KeyCode.Alpha3;
         }
-        SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
+        // SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
     }
 
     void OnTriggerStay(Collider other) 

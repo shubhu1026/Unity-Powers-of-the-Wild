@@ -1,14 +1,11 @@
 fileFormatVersion: 2
-guid: da0bba0181b7703459fb85e883be6cc5
+guid: 2735b7c01da06c4479a059ea0e25443b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
-  - first:
-      74: 5448141572755543996
-    second: Male Dynamic Pose
+    second: jumping
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -23,14 +20,7 @@ ModelImporter:
     removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
-      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
-      : position error = 38.239262 mm\n\t'mixamorig:LeftLeg' : position error = 43.548523
-      mm\n\t'mixamorig:LeftFoot' : position error = 13.266995 mm\n\t'mixamorig:LeftToeBase'
-      : position error = 55.642288 mm\n\t'mixamorig:RightUpLeg' : position error
-      = 37.299255 mm\n\t'mixamorig:RightLeg' : position error = 44.041542 mm\n\t'mixamorig:RightFoot'
-      : position error = 13.411223 mm\n\t'mixamorig:RightToeBase' : position error
-      = 56.309494 mm\n"
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -46,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Male Dynamic Pose
+      name: jumping
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -64,7 +54,7 @@ ModelImporter:
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
