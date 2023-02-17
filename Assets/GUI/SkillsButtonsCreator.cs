@@ -5,7 +5,9 @@ using UnityEngine;
 public class SkillsButtonsCreator : MonoBehaviour
 {    
     [SerializeField] private GameObject buttonSkillPrefab;
+    [SerializeField] GameObject createSkillInfo;
     public static SkillsButtonsCreator instance;
+    private bool isActive;
     private void Awake()
     {
         if(instance == null)
@@ -15,16 +17,26 @@ public class SkillsButtonsCreator : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    public void CreateSkillButtons(AnimalSO[] listOfAnimalSkills)
+    private void Update() {
+        if(!isActive) return;
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            isActive = false;
+            createSkillInfo.SetActive(false);
+        }
+    }
+    public void CreateSkillButtons(Ability[] listOfAnimalSkills)
     {
+        isActive = true;
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
-        foreach (AnimalSO skillData in listOfAnimalSkills)
+        foreach (Ability skillData in listOfAnimalSkills)
         {
             GameObject button = Instantiate(buttonSkillPrefab, transform);
             button.GetComponent<AnimalButton>().Init(skillData);
         }
+        createSkillInfo.GetComponent<CreateSkillInfo>().CreateInfo(listOfAnimalSkills);
     }
 }

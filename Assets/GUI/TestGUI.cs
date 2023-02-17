@@ -7,7 +7,7 @@ public class TestGUI : MonoBehaviour
     [SerializeField] private AnimalSO[] animalSkillsSO;
     void Start()
     {
-        SkillsButtonsCreator.instance.CreateSkillButtons(animalSkillsSO);
+        //SkillsButtonsCreator.instance.CreateSkillButtons(animalSkillsSO);
     }
 
     

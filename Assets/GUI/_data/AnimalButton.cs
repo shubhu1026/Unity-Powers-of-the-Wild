@@ -7,20 +7,19 @@ using UnityEngine.UI;
 
 public class AnimalButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {    
-    private AnimalSO animalSO;
-    [Header("Time to show tooltip")]  
-    [SerializeField] private static float timeToShowTooltip = 1f;
+    private Ability ability;
+    
     [Space]
     [Header("Do not touch!")]    
     [SerializeField] Image icon;
     Action onPointer;
     
-    public void Init(AnimalSO animalSO)
+    public void Init(Ability ability)
     {
-        this.animalSO = animalSO;
-        icon.sprite = animalSO.animalIcon;
+        this.ability = ability;
+        icon.sprite = this.ability.icon;
         GetComponent<Button>().onClick.AddListener(
-                ()=>AudioSource.PlayClipAtPoint(this.animalSO.skillSound, Camera.main.transform.position));
+                ()=>AudioSource.PlayClipAtPoint(this.ability.sound, Camera.main.transform.position));
     }
     
     
@@ -29,7 +28,7 @@ public class AnimalButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Debug.Log("over the button");
         var v = GetComponent<RectTransform>();
         Vector3 position = new Vector3(transform.position.x, transform.position.y, 0);
-        Popup.instance.ShowPopup(position, animalSO.description);
+        Popup.instance.ShowPopup(position, ability.description);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

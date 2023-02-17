@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 public class Ability : ScriptableObject
 {
     [SerializeField] new string name;
+    [TextArea]
+    public string description;
+    public Sprite icon;
+    public AudioClip sound;
     public float activeTime;
     public float cooldownTime;
 

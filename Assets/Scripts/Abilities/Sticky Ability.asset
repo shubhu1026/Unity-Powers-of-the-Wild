@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc390f9185e9efd47b92495659033979, type: 3}
   m_Name: Sticky Ability
   m_EditorClassIdentifier: 
-  name: 
+  name: GLUE!
+  description: 'Like a snail
+
+    stick it up!'
+  icon: {fileID: 21300000, guid: f12654dadc40799448ae44f3ac7c44e4, type: 3}
+  sound: {fileID: 8300000, guid: 4fc9015a7cb680d47824be61fa8d267c, type: 3}
   activeTime: 0
   cooldownTime: 0
   isActive: 0
