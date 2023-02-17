@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
 
-    float moveSpeed;
+    public float moveSpeed;
+    float tinyMoveSpeed;
     float jumpForce;
     
     bool readyToJump = true;
@@ -54,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     
     public bool isBurrowing = false;
+    public bool echoLocation = false;
+    public bool isStrong = false;
+    public bool isTiny = false;
 
     void Awake()
     {
@@ -69,6 +73,8 @@ public class PlayerMovement : MonoBehaviour
         lowJumpGravity = Physics.gravity.y * (lowJumpMulitiplier - 1);
         playerHeight = originalPlayerHeight;
         jumpForce = baseJumpForce;
+
+        tinyMoveSpeed = baseMoveSpeed * 0.5f;
     }
 
     // Update is called once per frame
@@ -108,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
     void SlideOnSlopes()
     {
         surfaceAngle = surfaceAngleScript.GetSurfaceAngle();
-        if(surfaceAngle > 45)
+        if(surfaceAngle > 70)
         {
             horizontalInput = 0;
             verticalInput = 0;
@@ -164,6 +170,15 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        if(isTiny)
+        {
+            moveSpeed = tinyMoveSpeed;
+        }
+        else
+        {
+            moveSpeed = baseMoveSpeed;
+        }
 
         //on ground
         if(grounded)

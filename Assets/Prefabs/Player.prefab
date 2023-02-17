@@ -106,6 +106,8 @@ GameObject:
   - component: {fileID: 2532877891862029988}
   - component: {fileID: 2532877891862029989}
   - component: {fileID: 1319322123}
+  - component: {fileID: 4112432954918450733}
+  - component: {fileID: 1431527630}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -177,6 +179,8 @@ MonoBehaviour:
   boxSize: {x: 0, y: 0, z: 0}
   maxDistance: 0
   isBurrowing: 0
+  echoLocation: 0
+  isStrong: 0
 --- !u!114 &2532877891862029989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,9 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56f1d20a91e5be45a1a1dd5dc98a9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAbility: {fileID: 11400000, guid: 4177ef056ec3a1e4fa062624747af6f2, type: 2}
-  secondAbility: {fileID: 11400000, guid: c18b4da7a02fa504795e9142b49d7680, type: 2}
-  thirdAbility: {fileID: 11400000, guid: af2d605738229d942bf5413dc0ef5c57, type: 2}
+  firstAbility: {fileID: 11400000, guid: c18b4da7a02fa504795e9142b49d7680, type: 2}
+  secondAbility: {fileID: 11400000, guid: c50f32a1d93e5ff4d9cd0ff009e1c70f, type: 2}
+  thirdAbility: {fileID: 11400000, guid: 1e42425b115e520409caea4749d4ac37, type: 2}
 --- !u!114 &1319322123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +213,14 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 119
+--- !u!81 &4112432954918450733
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2532877891862029993}
+  m_Enabled: 1
 --- !u!114 &1431527630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,14 +241,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 41ce34c19ccaf1d4ca425737ee239db3, type: 3}
   - {fileID: 8300000, guid: fd3777f1e31fdef4e99b794559e9300e, type: 3}
   - {fileID: 8300000, guid: 419f75a1e21a49043a90005dc78b9f1c, type: 3}
---- !u!81 &4112432954918450733
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2532877891862029993}
-  m_Enabled: 1
 --- !u!1 &7366229529807665256
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ public class RatAbility : Ability
 
         playerTransform.localScale = targetScale;
         playerMovement.playerHeight *= 0.5f;
+
+        playerMovement.isTiny = true;
     }
 
     public override void ResetAbilityChanges(GameObject parent)
@@ -31,5 +33,7 @@ public class RatAbility : Ability
         Debug.Log("rat deactivated");
         playerTransform.localScale = originalScale;
         playerMovement.playerHeight *= playerMovement.OriginalPlayerHeight;
+
+        playerMovement.isTiny = false;
     }
 }

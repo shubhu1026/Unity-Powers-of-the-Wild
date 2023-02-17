@@ -24,11 +24,14 @@ public class GrowAbility : Ability
 
         playerTransform.localScale = targetScale;
         playerMovement.playerHeight *= 0.5f;
+
+        playerMovement.isStrong = true;
     }
 
     public override void ResetAbilityChanges(GameObject parent)
     {
         playerTransform.localScale = originalScale;
         playerMovement.playerHeight *= playerMovement.OriginalPlayerHeight;
+        playerMovement.isStrong = false;
     }
 }

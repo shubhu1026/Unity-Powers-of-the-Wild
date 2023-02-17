@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class AbilityHolder : MonoBehaviour
 {
-    [SerializeField] Ability firstAbility;
-    [SerializeField] Ability secondAbility;
-    [SerializeField] Ability thirdAbility;
+    [SerializeField] AbilitySet abilitySet1;
+    [SerializeField] AbilitySet abilitySet2;
+
+    Ability abilitySetToBeUsed;
+
+    Ability firstAbility;
+    Ability secondAbility;
+    Ability thirdAbility;
 
     // Ability activeAbility;
     // Ability previousAbility;
@@ -32,12 +37,19 @@ public class AbilityHolder : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
 
-        if (firstAbility != null)
-            firstAbility.abilityKey = KeyCode.Alpha1;
-        if (secondAbility != null)
-            secondAbility.abilityKey = KeyCode.Alpha2;
-        if (thirdAbility != null)
-            thirdAbility.abilityKey = KeyCode.Alpha3;
+        if(abilitySet1 != null)
+        {
+            firstAbility = abilitySet1.abil1;
+            secondAbility = abilitySet1.abil2;
+            thirdAbility = abilitySet1.abil3;
+
+            if (firstAbility != null)
+                firstAbility.abilityKey = KeyCode.Alpha1;
+            if (secondAbility != null)
+                secondAbility.abilityKey = KeyCode.Alpha2;
+            if (thirdAbility != null)
+                thirdAbility.abilityKey = KeyCode.Alpha3;
+        }
         SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
     }
 
