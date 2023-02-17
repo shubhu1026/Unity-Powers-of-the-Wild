@@ -34,8 +34,10 @@ public class SkillsButtonsCreator : MonoBehaviour
         }
         foreach (Ability skillData in listOfAnimalSkills)
         {
+            int index = 1;
             GameObject button = Instantiate(buttonSkillPrefab, transform);
-            button.GetComponent<AnimalButton>().Init(skillData);
+            button.GetComponent<AnimalButton>().Init(skillData, index);
+            index++;
         }
         createSkillInfo.GetComponent<CreateSkillInfo>().CreateInfo(listOfAnimalSkills);
     }

@@ -4,13 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SawTrap : MonoBehaviour, IDamageable
+public class SawTrap : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] int damage = 1;
     [SerializeField] float rotationSpeed = 15f;
     [SerializeField] Transform saw;
     [SerializeField] Transform waipoints;
+    [SerializeField] AudioClip audioClip;
     private int index;
     private Vector3 currentTargetPosition;
     private bool isMoving;
@@ -22,6 +23,7 @@ public class SawTrap : MonoBehaviour, IDamageable
             isMoving = true;
             return;
         }
+        
     }
     void Update()
     {

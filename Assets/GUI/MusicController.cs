@@ -28,5 +28,6 @@ public class MusicController : MonoBehaviour
     public void SetVolume(float value)
     {
         audioSource.volume = value;
+        
     }
 }

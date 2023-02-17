@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using TMPro;
 public class AnimalButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {    
     private Ability ability;
@@ -13,8 +13,8 @@ public class AnimalButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [Header("Do not touch!")]    
     [SerializeField] Image icon;
     Action onPointer;
-    
-    public void Init(Ability ability)
+    [SerializeField] TextMeshProUGUI textMesh;
+    public void Init(Ability ability, int index)
     {
         this.ability = ability;
         icon.sprite = this.ability.icon;

@@ -15,6 +15,8 @@ public class Spikes : MonoBehaviour, IDamageable
     }
     [SerializeField] int damage = 1;
     [SerializeField] float activeSpeed = 10f;
+    [SerializeField] ParticleSystem ps;
+    [SerializeField] AudioClip audioClip;
     private State state;
     private Vector3 movement = new Vector3(0, 0.8f, 0);
     private Vector3 startPosition;
@@ -43,6 +45,8 @@ public class Spikes : MonoBehaviour, IDamageable
                 if(transform.position != endPosition) return;                
                 counter = 0;
                 state = State.reload;
+                ps.Play(true);
+                SFX.instance.PlaySFX(audioClip, transform.position);
                 Debug.Log("reload state");
             }
             break;

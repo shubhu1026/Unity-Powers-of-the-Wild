@@ -80,6 +80,7 @@ public class AbilityHolder : MonoBehaviour
                 else if(Input.GetKeyDown(KeyCode.Alpha3))
                 {
                     currentAbility = AbilityState.ability3;
+                    
                 }
                 break;
             case AbilityState.ability1:
