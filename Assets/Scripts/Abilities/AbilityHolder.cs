@@ -32,12 +32,13 @@ public class AbilityHolder : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
 
-        if(firstAbility != null)
-        firstAbility.abilityKey = KeyCode.Alpha1;
-        if(secondAbility != null)
-        secondAbility.abilityKey = KeyCode.Alpha2;
-        if(thirdAbility != null)
-        thirdAbility.abilityKey = KeyCode.Alpha3;
+        if (firstAbility != null)
+            firstAbility.abilityKey = KeyCode.Alpha1;
+        if (secondAbility != null)
+            secondAbility.abilityKey = KeyCode.Alpha2;
+        if (thirdAbility != null)
+            thirdAbility.abilityKey = KeyCode.Alpha3;
+        SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
     }
 
     void OnTriggerStay(Collider other) 
@@ -79,6 +80,7 @@ public class AbilityHolder : MonoBehaviour
                 else if(Input.GetKeyDown(KeyCode.Alpha3))
                 {
                     currentAbility = AbilityState.ability3;
+                    
                 }
                 break;
             case AbilityState.ability1:

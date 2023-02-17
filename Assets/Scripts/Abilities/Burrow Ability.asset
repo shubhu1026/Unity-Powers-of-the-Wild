@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97379f99312da8c48a5921534c693105, type: 3}
   m_Name: Burrow Ability
   m_EditorClassIdentifier: 
-  name: 
+  name: DIG!
+  description: 'hide yourself
+
+    under the ground'
+  icon: {fileID: 21300000, guid: b5fb9f4372aac8a49a6123234068f5da, type: 3}
+  sound: {fileID: 8300000, guid: 5882114785cd1644ab1b0eeca9fb03c0, type: 3}
   activeTime: 0
   cooldownTime: 0
-  abilityKey: 0
+  isActive: 0
+  abilityKey: 50
