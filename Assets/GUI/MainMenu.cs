@@ -24,4 +24,8 @@ public class MainMenu : MonoBehaviour
     {
         DataHolder.instance.SetMusicVolume(value);
     }
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Level 1");
+    }
 }

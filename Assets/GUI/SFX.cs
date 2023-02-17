@@ -14,7 +14,7 @@ public class SFX : MonoBehaviour
             return;
         }
         instance = this;
-        
+        DontDestroyOnLoad(gameObject);
     }
     public void PlaySFX(AudioClip audioClip, Vector3 pos)
     {
@@ -23,9 +23,9 @@ public class SFX : MonoBehaviour
     public void SetVolume(float value)
     {
         volume = value;
-        foreach (var item in FindObjectsOfType<AudioSource>())
+        foreach (var item in FindObjectsOfType<SFXChanged>())
         {
-            item.volume = value;
+            item.OnSFXVolumeChanged();
         }
     }
 }

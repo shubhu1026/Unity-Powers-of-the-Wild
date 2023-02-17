@@ -13,7 +13,7 @@ public class DataHolder : MonoBehaviour
             return;
         }
         instance = this;
-        
+        DontDestroyOnLoad(gameObject);
     }
     public float musicVolume;
     public float sfxVolume;
