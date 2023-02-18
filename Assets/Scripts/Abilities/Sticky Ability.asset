@@ -20,5 +20,8 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: 4fc9015a7cb680d47824be61fa8d267c, type: 3}
   activeTime: 0
   cooldownTime: 0
-  isActive: 0
-  abilityKey: 0
+  isActive: 1
+  abilityKey: 50
+  layer_mask:
+    serializedVersion: 2
+    m_Bits: 512

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Stickable
   - NoAbilityChange
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Ground
   - No Ability Change
   - Player
-  - 
+  - Movable
   - 
   - 
   - 

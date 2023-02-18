@@ -6,6 +6,7 @@ using UnityEngine;
 public class StickyAbility : Ability
 {
     GlueTest glueObject;
+    [SerializeField] LayerMask layer_mask;
 
     public override void Activate(GameObject parent)
     {
@@ -21,18 +22,12 @@ public class StickyAbility : Ability
             // SFX.instance.PlaySFX(sound, glueObject.transform.position);
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if(Physics.Raycast(ray, out hit))
+            if(Physics.Raycast(ray, out hit, Mathf.Infinity , layer_mask))
             {
                 var selection = hit.transform;
-                if(selection.CompareTag("Stickable"))
+                if(selection.TryGetComponent<GlueTest>(out glueObject))
                 {
-                    glueObject = selection.GetComponent<GlueTest>();
-                    // glueObject.isSticky = !glueObject.isSticky;
                     glueObject.isSticky = true;
-                }
-                else
-                {
-                    //show some text
                 }
             }
         }

@@ -61,6 +61,11 @@ public class PlayerMovement : MonoBehaviour
     public bool echoLocation = false;
     public bool isStrong = false;
     public bool isTiny = false;
+    public bool highJump = false;
+
+    float groundedResetTime = 2.5f;
+
+    Vector3 offsetVector;
 
     void Awake()
     {
@@ -82,6 +87,8 @@ public class PlayerMovement : MonoBehaviour
         jumpForce = baseJumpForce;
 
         tinyMoveSpeed = baseMoveSpeed * 0.5f;
+
+        offsetVector = new Vector3(0, playerHeight, 0);
     }
 
     // Update is called once per frame
@@ -89,20 +96,18 @@ public class PlayerMovement : MonoBehaviour
     {
         //ground check
         GroundCheck();
+        if(!grounded)
+        {
+            groundedResetTime -= Time.deltaTime;
+            if(groundedResetTime <= 0 || grounded)
+            {
+                grounded = true;
+                groundedResetTime = 2.5f;
+            }
+        }
 
         MyInput();
         SpeedControl();
-
-        //handle drag
-        if(grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0;
-
-        if(!isBurrowing)
-        {
-            // SlideOnSlopes();
-        }
     }
 
     void FixedUpdate() 
@@ -118,20 +123,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void SlideOnSlopes()
-    {
-        surfaceAngle = surfaceAngleScript.GetSurfaceAngle();
-        if(surfaceAngle > 70)
-        {
-            horizontalInput = 0;
-            verticalInput = 0;
-            rb.velocity = Vector3.up * -4f;
-        }
-    }
-
     void GroundCheck()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, 0.2f, whatIsGround);
+        // grounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, whatIsGround);
+        grounded = Physics.Raycast(transform.position + offsetVector, Vector3.down, playerHeight + 0.2f);
     }
 
     void MyInput()
@@ -151,7 +146,8 @@ public class PlayerMovement : MonoBehaviour
         }
         
         isJumpPressed = Input.GetKey(jumpKey);
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        // if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && readyToJump)
         {
             readyToJump = false;
             Jump();
@@ -211,6 +207,15 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump()
     {
+        if(highJump)
+        {
+            jumpForce = baseJumpForce * 3f;
+        }
+        else
+        {
+            jumpForce = baseJumpForce;
+        }
+
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
