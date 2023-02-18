@@ -13,6 +13,7 @@ public class KangarooJumpAbility : Ability
         Debug.Log("K jump activated");
         playerMovement = parent.GetComponent<PlayerMovement>();
         playerMovement.JumpForce = playerMovement.BaseJumpForce * jumpMultiplier;
+        SFX.instance.PlaySFX(sound, playerMovement.transform.position);
     }
 
     public override void ResetAbilityChanges(GameObject parent)

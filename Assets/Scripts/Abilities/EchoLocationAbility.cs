@@ -11,6 +11,7 @@ public class EchoLocationAbility : Ability
     {
         playerMovement = parent.GetComponent<PlayerMovement>();
         playerMovement.echoLocation = true;
+        SFX.instance.PlaySFX(sound, playerMovement.transform.position);
     }
 
     public override void ResetAbilityChanges(GameObject parent)

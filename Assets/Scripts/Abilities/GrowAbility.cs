@@ -26,6 +26,7 @@ public class GrowAbility : Ability
         playerMovement.playerHeight *= 0.5f;
 
         playerMovement.isStrong = true;
+        SFX.instance.PlaySFX(sound, playerMovement.transform.position);
     }
 
     public override void ResetAbilityChanges(GameObject parent)

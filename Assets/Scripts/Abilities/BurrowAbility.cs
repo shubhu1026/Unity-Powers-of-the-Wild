@@ -27,7 +27,7 @@ public class BurrowAbility : Ability
 
     public override void Active(GameObject parent)
     {
-        
+        SFX.instance.PlaySFX(sound, playerMovement.transform.position);
     }
 
     public override void ResetAbilityChanges(GameObject parent)
