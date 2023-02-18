@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(!isBurrowing)
         {
-            SlideOnSlopes();
+            // SlideOnSlopes();
         }
     }
 

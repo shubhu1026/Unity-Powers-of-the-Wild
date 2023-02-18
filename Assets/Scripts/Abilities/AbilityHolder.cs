@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AbilityHolder : MonoBehaviour
 {
-    [SerializeField] AbilitySet abilitySet1;
-    [SerializeField] AbilitySet abilitySet2;
+    [SerializeField] AbilitySet abilitySet;
 
     Ability abilitySetToBeUsed;
 
@@ -37,11 +36,19 @@ public class AbilityHolder : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
 
-        if(abilitySet1 != null)
+        Invoke("SetUpAbilities",1);
+        // SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
+    }
+
+    void SetUpAbilities()
+    {
+        abilitySet = GameManager.Instance.abilitySetToBeUsed;
+
+        if(abilitySet != null)
         {
-            firstAbility = abilitySet1.abil1;
-            secondAbility = abilitySet1.abil2;
-            thirdAbility = abilitySet1.abil3;
+            firstAbility = abilitySet.abil1;
+            secondAbility = abilitySet.abil2;
+            thirdAbility = abilitySet.abil3;
 
             if (firstAbility != null)
                 firstAbility.abilityKey = KeyCode.Alpha1;
@@ -50,7 +57,6 @@ public class AbilityHolder : MonoBehaviour
             if (thirdAbility != null)
                 thirdAbility.abilityKey = KeyCode.Alpha3;
         }
-        // SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
     }
 
     void OnTriggerStay(Collider other) 
@@ -109,7 +115,6 @@ public class AbilityHolder : MonoBehaviour
 
     void AbilityStatus(Ability ability, ref int count)
     {
-        
         if(count < 1)
         {
             ability.Activate(gameObject);

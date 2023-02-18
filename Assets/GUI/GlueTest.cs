@@ -25,6 +25,7 @@ public class GlueTest : MonoBehaviour
 
         var fixedJoint = gameObject.AddComponent<FixedJoint>();
         Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+        rb.mass = 0.5f;
         Debug.Log(rb);
         fixedJoint.connectedBody = rb;
         fixedJoint.breakForce = float.PositiveInfinity;        

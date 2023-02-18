@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 2532877891862029993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.77, y: 6.451, z: 92.8}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6342559358230440756}
@@ -169,6 +169,7 @@ MonoBehaviour:
   baseJumpForce: 8
   jumpCooldown: 0.5
   airMultiplier: 0.4
+  moveSpeed: 0
   originalPlayerHeight: 1
   whatIsGround:
     serializedVersion: 2
@@ -181,6 +182,7 @@ MonoBehaviour:
   isBurrowing: 0
   echoLocation: 0
   isStrong: 0
+  isTiny: 0
 --- !u!114 &2532877891862029989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,9 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56f1d20a91e5be45a1a1dd5dc98a9cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstAbility: {fileID: 11400000, guid: c18b4da7a02fa504795e9142b49d7680, type: 2}
-  secondAbility: {fileID: 11400000, guid: c50f32a1d93e5ff4d9cd0ff009e1c70f, type: 2}
-  thirdAbility: {fileID: 11400000, guid: 1e42425b115e520409caea4749d4ac37, type: 2}
+  abilitySet1: {fileID: 0}
+  abilitySet2: {fileID: 0}
 --- !u!114 &1319322123
 MonoBehaviour:
   m_ObjectHideFlags: 0

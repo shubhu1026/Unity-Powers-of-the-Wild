@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class AbilitySet : ScriptableObject
 {
     [SerializeField] public Ability abil1;

@@ -30,7 +30,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        Debug.Log("Start Game");
+        StartGame();
+    }
+    
+    public void StartGame()
+    {
+        OnLevelLoad();
+    }
+
+    public void OnLevelLoad()
+    {
+        SelectAbilitySet(GetLevelFromSceneBuildIndex());
+        Debug.Log("Ability Set Given:" + abilitySetToBeUsed.name);
     }
 
     public void RestartLevel()
@@ -42,8 +54,8 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         Debug.Log("Load next level");
-        // SelectAbilitySet(GetLevelFromSceneBuildIndex() + 1);
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SelectAbilitySet(GetLevelFromSceneBuildIndex() + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     int GetLevelFromSceneBuildIndex()

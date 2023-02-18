@@ -18,7 +18,7 @@ public class StickyAbility : Ability
     {
         if(Input.GetMouseButtonDown(0))
         {
-            SFX.instance.PlaySFX(sound, glueObject.transform.position);
+            // SFX.instance.PlaySFX(sound, glueObject.transform.position);
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit))
@@ -29,6 +29,10 @@ public class StickyAbility : Ability
                     glueObject = selection.GetComponent<GlueTest>();
                     // glueObject.isSticky = !glueObject.isSticky;
                     glueObject.isSticky = true;
+                }
+                else
+                {
+                    //show some text
                 }
             }
         }
