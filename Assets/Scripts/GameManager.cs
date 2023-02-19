@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        Invoke("Restart", 2.5f);
+    }
+
+    void Restart()
+    {
         SelectAbilitySet(GetLevelFromSceneBuildIndex());
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -54,6 +59,11 @@ public class GameManager : MonoBehaviour
     public void LoadNextLevel()
     {
         Debug.Log("Load next level");
+        Invoke("NextLevel", 2.5f);
+    }
+
+    void NextLevel()
+    {
         SelectAbilitySet(GetLevelFromSceneBuildIndex() + 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
