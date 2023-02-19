@@ -17,9 +17,11 @@ public class PlayerCollisionDetection : MonoBehaviour
         {
             // SFX.instance.PlaySFX(hurt[Random.Range(0, hurt.Length)], transform.position);
             blood.Play();
+            GameManager.Instance.RestartLevel();
             Debug.Log(gameObject.name.ToString() + " was hit by " + damager + " do " + damager.GetDamageValue());
         }
     }
+
     private void onCollisionEnter(Collision other) {
         Debug.Log(other + " in in the player, this is player collider");
     }
