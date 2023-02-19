@@ -13,7 +13,7 @@ public class StickyAbility : Ability
         Debug.Log("spider web activated");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        SFX.instance.PlaySFX(sound, glueObject.transform.position);
+        
         parent.GetComponent<ParticlePlsyer>().PlaySkillParticle();
     }
 
@@ -28,6 +28,7 @@ public class StickyAbility : Ability
                 var selection = hit.transform;
                 if(selection.TryGetComponent<GlueTest>(out glueObject))
                 {
+                    SFX.instance.PlaySFX(sound, glueObject.transform.position);
                     glueObject.isSticky = true;
                 }
             }

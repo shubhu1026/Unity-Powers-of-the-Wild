@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
 
+    // [Header("Cameras")]
+    // [SerializeField] CinemachineVirtualCamera normalCam;
+    // [SerializeField] CinemachineVirtualCamera burrowingCam;
+ 
     float horizontalInput;
     float verticalInput;
 
@@ -90,6 +95,18 @@ public class PlayerMovement : MonoBehaviour
 
         offsetVector = new Vector3(0, playerHeight, 0);
     }
+
+    // void OnEnable() 
+    // {
+    //     CameraSwitcher.Register(normalCam);
+    //     CameraSwitcher.Register(burrowingCam);
+    // }
+    
+    // void OnDisable() 
+    // {
+    //     CameraSwitcher.Unregister(normalCam);
+    //     CameraSwitcher.Unregister(burrowingCam);
+    // }
 
     // Update is called once per frame
     void Update()
