@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43030463a3d2830488a5981a3d0bd503, type: 3}
   m_Name: Echo Location Ability
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  icon: {fileID: 0}
-  sound: {fileID: 0}
+  name: Echo Location
+  description: 'you can see more
+
+    than normal eyes'
+  icon: {fileID: 21300000, guid: d0dc69a58513b16418d9b8fa7a7d9c71, type: 3}
+  sound: {fileID: 8300000, guid: 53391d6025f61424cbf6cfa22d58868d, type: 3}
   activeTime: 0
   cooldownTime: 0
   isActive: 0
-  abilityKey: 0
+  abilityKey: 50

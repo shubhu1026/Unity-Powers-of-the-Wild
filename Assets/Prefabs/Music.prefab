@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebe796da70c73d14c92138ea36e2dba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startLVL1: {fileID: 8300000, guid: 8a108c8364fb67a4fac03fa8b8cdec9a, type: 3}
+  endLVL1: {fileID: 8300000, guid: b99b9e3cffd5bf747b6fb4a2cf9ee73c, type: 3}
+  startLVL2: {fileID: 8300000, guid: bd77c8a8bae053240b746d0c8ea4b30f, type: 3}
+  endLVL2: {fileID: 8300000, guid: ade6a232e5ff45e4991c2be9491c42d4, type: 3}
+  startLVL3: {fileID: 8300000, guid: 66efd1061e303f04390187b9282ecfb2, type: 3}
   musicTracks:
   - {fileID: 8300000, guid: 2d403905dd7871f46ba9a5cd8503a99e, type: 3}
   - {fileID: 8300000, guid: cbf4b7e172002ae4fa57d48346b33f04, type: 3}

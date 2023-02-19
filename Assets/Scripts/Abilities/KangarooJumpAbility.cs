@@ -12,7 +12,8 @@ public class KangarooJumpAbility : Ability
         Debug.Log("K jump activated");
         playerMovement = parent.GetComponent<PlayerMovement>();
         playerMovement.highJump = true;
-        // SFX.instance.PlaySFX(sound, playerMovement.transform.position);
+        SFX.instance.PlaySFX(sound, playerMovement.transform.position);
+        parent.GetComponent<ParticlePlsyer>().PlaySkillParticle();
     }
 
     public override void ResetAbilityChanges(GameObject parent)

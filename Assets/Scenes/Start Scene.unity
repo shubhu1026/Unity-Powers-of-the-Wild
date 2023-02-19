@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -218,7 +218,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69224901}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &69224903
 Camera:
   m_ObjectHideFlags: 0
@@ -386,6 +386,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2232476784271057983, guid: de9c0fd9801a64840badbc2df0b20591,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.095
+      objectReference: {fileID: 0}
     - target: {fileID: 2232476784303038348, guid: de9c0fd9801a64840badbc2df0b20591,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -586,6 +591,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2232476785630060242, guid: de9c0fd9801a64840badbc2df0b20591,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.668
+      objectReference: {fileID: 0}
     - target: {fileID: 3393935224485077242, guid: de9c0fd9801a64840badbc2df0b20591,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -679,6 +689,14 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!81 &1262459997
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262459990}
+  m_Enabled: 1
 --- !u!1 &1361783576
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +885,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496511562965597587, guid: dbc691043ca3c794ab9e4d8a6ed90104,
+        type: 3}
+      propertyPath: sfxVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496511562965597587, guid: dbc691043ca3c794ab9e4d8a6ed90104,
+        type: 3}
+      propertyPath: musicVolume
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7852738181886070537, guid: dbc691043ca3c794ab9e4d8a6ed90104,
         type: 3}

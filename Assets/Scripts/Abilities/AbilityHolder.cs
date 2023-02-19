@@ -37,7 +37,6 @@ public class AbilityHolder : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
 
         Invoke("SetUpAbilities",1);
-        // SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
     }
 
     void SetUpAbilities()
@@ -56,6 +55,7 @@ public class AbilityHolder : MonoBehaviour
                 secondAbility.abilityKey = KeyCode.Alpha2;
             if (thirdAbility != null)
                 thirdAbility.abilityKey = KeyCode.Alpha3;
+            SkillsButtonsCreator.instance.CreateSkillButtons(new Ability[]{ firstAbility, secondAbility, thirdAbility });
         }
     }
 

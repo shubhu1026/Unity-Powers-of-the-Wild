@@ -13,13 +13,14 @@ public class StickyAbility : Ability
         Debug.Log("spider web activated");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        SFX.instance.PlaySFX(sound, glueObject.transform.position);
+        parent.GetComponent<ParticlePlsyer>().PlaySkillParticle();
     }
 
     public override void Active(GameObject parent)
     {
         if(Input.GetMouseButtonDown(0))
         {
-            // SFX.instance.PlaySFX(sound, glueObject.transform.position);
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit, Mathf.Infinity , layer_mask))

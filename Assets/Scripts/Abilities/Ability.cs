@@ -12,7 +12,7 @@ public class Ability : ScriptableObject
     public AudioClip sound;
     public float activeTime;
     public float cooldownTime;
-
+    
     public bool isActive = false;
 
     public KeyCode abilityKey;

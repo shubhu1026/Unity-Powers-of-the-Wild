@@ -20,6 +20,7 @@ public class AnimalButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         icon.sprite = this.ability.icon;
         GetComponent<Button>().onClick.AddListener(
                 ()=>AudioSource.PlayClipAtPoint(this.ability.sound, Camera.main.transform.position));
+        textMesh.text = index.ToString();
     }
     
     

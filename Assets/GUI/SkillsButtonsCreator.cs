@@ -19,7 +19,7 @@ public class SkillsButtonsCreator : MonoBehaviour
     }
     private void Update() {
         if(!isActive) return;
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.F))
         {
             isActive = false;
             createSkillInfo.SetActive(false);
@@ -32,9 +32,9 @@ public class SkillsButtonsCreator : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        int index = 1;
         foreach (Ability skillData in listOfAnimalSkills)
-        {
-            int index = 1;
+        {            
             GameObject button = Instantiate(buttonSkillPrefab, transform);
             button.GetComponent<AnimalButton>().Init(skillData, index);
             index++;

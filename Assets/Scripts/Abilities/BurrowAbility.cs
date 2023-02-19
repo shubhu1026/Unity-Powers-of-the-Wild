@@ -23,11 +23,12 @@ public class BurrowAbility : Ability
 
         collider.height = 0.3f;
         collider.center = new Vector3(collider.center.x, 1.7f, collider.center.z);
+        SFX.instance.PlaySFX(sound, playerMovement.transform.position);
+        parent.GetComponent<ParticlePlsyer>().PlaySkillParticle();
     }
 
     public override void Active(GameObject parent)
     {
-        // SFX.instance.PlaySFX(sound, playerMovement.transform.position);
     }
 
     public override void ResetAbilityChanges(GameObject parent)

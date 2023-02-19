@@ -6,7 +6,8 @@ using TMPro;
 public class CreateSkillInfo : MonoBehaviour
 {
     [SerializeField] GameObject prefab;
-    
+    [SerializeField] TextMeshProUGUI closeInfo;
+
     public void CreateInfo(Ability[] abilities)
     {
         if(transform.childCount > 0)
@@ -19,6 +20,7 @@ public class CreateSkillInfo : MonoBehaviour
             GameObject info = Instantiate(prefab, transform);
             info.GetComponent<SkillInfoPref>().Init(item.icon, item.description);
         }
+        Instantiate(closeInfo, transform);
     }
     
 }
